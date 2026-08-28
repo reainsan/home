@@ -1,24 +1,39 @@
-# Single Life Quotes — Life Legally Single
+# Single Life Quotes — React + Vite + Cloudflare Worker
 
-Flashy React SPA for Cloudflare Workers/Pages-style static deployment. Brand voice: Life Legally Single by Rea Insan.
+Flashy single-page quote experience for **Single Life Quotes by Rea Insan / Life Legally Single**.
 
-## Run
+## Cloudflare Workers deployment
+
+This repo is configured for a **Cloudflare Worker with static assets**.
+
+### Cloudflare build settings
+
+Use these settings in the Workers & Pages dashboard:
+
+- **Build command:** `npm run build`
+- **Deploy command:** `npx wrangler deploy`
+- **Build output directory:** leave blank / not required for Workers deployment
+
+The build command creates `dist/` before Wrangler deploys. The previous deployment error happened because Wrangler was being run without first running Vite, so `dist/` did not exist.
+
+### Local
+
+```bash
 npm install
-npm run dev
-
-## Build
 npm run build
+npx wrangler deploy
+```
 
-## Cloudflare Worker/static hosting
-Build with Vite. Deploy the `dist` directory using Cloudflare Pages or a Worker configured to serve static assets. If using a Worker with `wrangler`, add an assets binding and route SPA fallbacks to `/index.html`.
+Or:
 
-## SEO / LLMO / GEO
-- Semantic headings and crawlable quote text
-- Canonical URL
-- Open Graph metadata
-- Schema.org WebPage + author
-- Clear definitional section answering “What are single life quotes?”
-- Author attribution on every original quote
-- Stable, descriptive URL suggestion: `/single-life-quotes`
+```bash
+npm run deploy
+```
 
-Important: LLM visibility cannot be guaranteed. The best strategy is unique, attributable content, strong internal linking, consistent author/entity references, and indexable HTML.
+## SPA routing
+
+`wrangler.toml` uses `not_found_handling = "single-page-application"`, so unknown routes fall back to `index.html`.
+
+## SEO / GEO / LLMO
+
+The app includes crawlable text, metadata, Open Graph tags, JSON-LD, author attribution, and topical language around single life quotes, self-love, independence, solo living, dating, freedom, and soft life.
