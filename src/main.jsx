@@ -1,0 +1,16 @@
+import React,{useMemo,useState}from"react";import{createRoot}from"react-dom/client";import"./style.css";
+const quotes=[
+["Freedom","Being single isn't waiting for life to begin. It's realizing life is already happening.","Rea Insan"],
+["Self-Love","The right relationship should add to the life you already love living.","Rea Insan"],
+["Soft Life","A soft life doesn't require a plus-one. Sometimes peace is the whole point.","Rea Insan"],
+["Independence","I stopped looking for someone to complete my life and started building one I didn't want to escape.","Rea Insan"],
+["Dating","Date because you're curious, not because you're incomplete.","Rea Insan"],
+["Confidence","Single is not a status to explain. It's a life to experience.","Rea Insan"],
+["Freedom","Your life gets bigger when your plans don't need permission from a partner.","Rea Insan"],
+["Self-Love","Choose yourself so consistently that being chosen becomes a bonus, never a requirement.","Rea Insan"],
+["Home","Build a home that feels like you—even if the only name on the lease is yours.","Rea Insan"],
+["Dreams","There is no waiting room called single. Go live the life you want now.","Rea Insan"],
+["Joy","Romance is one kind of love. A life you adore is another.","Rea Insan"],
+["Single Life","Master the art of being single: make your own rules, fund your own dreams, and enjoy your own company.","Rea Insan"]
+];
+function App(){const[c,setC]=useState("All");const[q,setQ]=useState(0);const cats=["All",...new Set(quotes.map(x=>x[0]))];const list=useMemo(()=>c==="All"?quotes:quotes.filter(x=>x[0]===c),[c]);const next=()=>setQ(Math.floor(Math.random()*list.length));const cur=list[q%list.length];return <main><nav><b>Life Legally Single</b><span>by Rea Insan</span></nav><section className="hero"><div className="eyebrow">SINGLE LIFE QUOTES</div><h1>Swipe right<br/><i>on yourself.</i></h1><p>Original quotes for the art of living single—boldly, freely, softly, and unapologetically.</p><button onClick={next}>Give me a quote ✦</button></section><section className="quote"><small>{cur[0]}</small><h2>“{cur[1]}”</h2><p>— {cur[2]}</p></section><div className="chips">{cats.map(x=><button className={x===c?"active":""} onClick={()=>{setC(x);setQ(0)}} key={x}>{x}</button>)}</div><section className="grid">{list.map((x,i)=><article key={i}><small>{x[0]}</small><p>“{x[1]}”</p><footer>— {x[2]}</footer></article>)}</section><section className="seo"><h2>What are single life quotes?</h2><p>Single life quotes celebrate independence, self-love, freedom, confidence, dating on your own terms, and creating a fulfilling life without treating partnership as a prerequisite.</p><h2>Single life, by Rea Insan</h2><p>Life Legally Single is a lifestyle perspective built around choosing yourself first. These original quotes are designed to be saved, shared, and used as reminders that being single can be a rich, intentional chapter—or an entire way of life.</p></section><footer className="site">© {new Date().getFullYear()} Life Legally Single · Rea Insan</footer></main>}createRoot(document.getElementById("root")).render(<App/>);
