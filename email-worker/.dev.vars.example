@@ -1,0 +1,4 @@
+BREVO_API_KEY=replace-me
+BREVO_LIST_ID=replace-me
+BREVO_SENDER_EMAIL=hello@example.com
+BREVO_SENDER_NAME=Single Life Quotes, by Rea
