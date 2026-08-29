@@ -2,15 +2,23 @@
 
 Tiny Cloudflare Worker that sends the daily **Single Life Quotes, by Rea** quote to a Brevo marketing list.
 
+## Cloudflare Workers Builds
+
+If this Worker is deployed from the `reainsan/home` repository, configure the Cloudflare Worker build settings as:
+
+- **Root directory:** `email-worker`
+- **Build command:** none / blank
+- **Deploy command:** `npx wrangler deploy`
+
+The repository root contains the website and its Vite build. Do not use the repository root as the email Worker's build directory.
+
 ## What it does
 
-- Runs once a day at **13:00 UTC** (9:00 AM Eastern during daylight saving time).
-- Selects the day's quote deterministically so the same quote is not randomly repeated during the day.
+- Runs once a day at **13:00 UTC**.
+- Selects the day's quote deterministically.
 - Creates a Brevo email campaign targeted at `BREVO_LIST_ID`.
 - Sends that campaign immediately.
 - Uses Brevo campaign sending so list unsubscribe handling remains part of Brevo's marketing-email flow.
-
-Cloudflare Cron Triggers invoke the Worker `scheduled()` handler on the configured schedule. Brevo's Email Campaign API supports creating a campaign with a recipient list and sending it with `sendNow`. See the official docs linked below.
 
 ## Secrets
 
@@ -36,11 +44,3 @@ npx wrangler deploy
 ```
 
 The Worker is intentionally independent from the website Worker. The website only needs its `/api/subscribe` endpoint to add subscribers to the same Brevo list.
-
-## Important
-
-The Brevo API key belongs in Cloudflare secrets, not GitHub source code. Cloudflare's current Worker guidance recommends secrets for credentials, and Cron Triggers execute on UTC time.
-
-- Cloudflare Cron Triggers: https://developers.cloudflare.com/workers/configuration/cron-triggers/
-- Brevo Create Email Campaign: https://developers.brevo.com/reference/create-email-campaign
-- Brevo Send Campaign Now: https://developers.brevo.com/reference/send-email-campaign-now
