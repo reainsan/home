@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "wrangler dev",
+    "build": "echo 'No build required for email worker'",
     "deploy": "wrangler deploy"
   },
   "devDependencies": {
