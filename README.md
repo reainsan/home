@@ -6,13 +6,18 @@ Flashy single-page quote experience for **Single Life Quotes by Rea Insan / Life
 
 This repo deploys as a **Cloudflare Worker with static assets**. Vite must build the React app before Wrangler deploys it.
 
-### Cloudflare build settings
+### Cloudflare Workers Builds settings
 
-Use these settings in the Workers & Pages dashboard:
+In **Workers & Pages → your Worker → Settings → Builds**, use:
 
 - **Build command:** `bun run build`
 - **Deploy command:** `npx wrangler deploy`
+- **Root directory:** `/` (repository root)
 - **Build output directory:** leave blank / not required for Workers deployment
+
+Workers Builds runs the build command first and the deploy command second. If the Build command is blank, Wrangler starts before `dist/` exists and deployment fails with an `assets.directory` error.
+
+The repository also declares a Wrangler custom build command in `wrangler.toml`, so `npx wrangler deploy` can build the Vite app in environments that honor Wrangler custom builds. Cloudflare Workers Builds currently requires the Dashboard Build command to be set explicitly.
 
 The required deployment flow is:
 
