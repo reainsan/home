@@ -1,4 +1,5 @@
 name = "home"
+main = "src/worker.js"
 compatibility_date = "2026-08-28"
 
 [build]
