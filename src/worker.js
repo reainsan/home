@@ -1,6 +1,9 @@
 const json = (data, status = 200) => new Response(JSON.stringify(data), {
   status,
-  headers: { "content-type": "application/json; charset=utf-8" },
+  headers: {
+    "content-type": "application/json; charset=utf-8",
+    "cache-control": "no-store",
+  },
 });
 
 const todayQuote = () => {
@@ -37,11 +40,16 @@ export default {
       if (request.method !== "POST") return json({ error: "Method not allowed" }, 405);
 
       if (!env.BREVO_API_KEY || !env.BREVO_LIST_ID) {
+        console.error("Brevo is not configured: missing BREVO_API_KEY or BREVO_LIST_ID");
         return json({ error: "Newsletter service is not configured yet." }, 503);
       }
 
       let body;
-      try { body = await request.json(); } catch { return json({ error: "Invalid request." }, 400); }
+      try {
+        body = await request.json();
+      } catch {
+        return json({ error: "Invalid request." }, 400);
+      }
 
       const email = String(body?.email || "").trim().toLowerCase();
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
