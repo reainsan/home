@@ -4,35 +4,44 @@ Flashy single-page quote experience for **Single Life Quotes by Rea Insan / Life
 
 ## Cloudflare Workers deployment
 
-This repo is configured for a **Cloudflare Worker with static assets**.
+This repo deploys as a **Cloudflare Worker with static assets**. Vite must build the React app before Wrangler deploys it.
 
 ### Cloudflare build settings
 
 Use these settings in the Workers & Pages dashboard:
 
-- **Build command:** `npm run build`
+- **Build command:** `bun run build`
 - **Deploy command:** `npx wrangler deploy`
 - **Build output directory:** leave blank / not required for Workers deployment
 
-The build command creates `dist/` before Wrangler deploys. The previous deployment error happened because Wrangler was being run without first running Vite, so `dist/` did not exist.
+The required deployment flow is:
+
+```text
+bun install
+→ bun run build
+→ dist/
+→ npx wrangler deploy
+```
+
+The repository does **not** commit `dist/`; Cloudflare creates it during the build step.
 
 ### Local
 
 ```bash
-npm install
-npm run build
+bun install
+bun run build
 npx wrangler deploy
 ```
 
 Or:
 
 ```bash
-npm run deploy
+bun run deploy
 ```
 
 ## SPA routing
 
-`wrangler.toml` uses `not_found_handling = "single-page-application"`, so unknown routes fall back to `index.html`.
+`wrangler.toml` uses `not_found_handling = "single-page-application"`, so routes that do not match a static asset fall back to `index.html`. This keeps React client-side routes working when refreshed directly.
 
 ## SEO / GEO / LLMO
 
