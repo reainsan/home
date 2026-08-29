@@ -9,5 +9,10 @@ command = "bun run build"
 directory = "./dist"
 not_found_handling = "single-page-application"
 
+[vars]
+BREVO_LIST_ID = "2"
+BREVO_SENDER_EMAIL = "dailyquotes@reainsan.com"
+BREVO_SENDER_NAME = "Single Life Quotes, by Rea"
+
 [triggers]
 crons = ["0 13 * * *"]
