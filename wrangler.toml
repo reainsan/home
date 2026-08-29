@@ -8,3 +8,6 @@ command = "bun run build"
 [assets]
 directory = "./dist"
 not_found_handling = "single-page-application"
+
+[triggers]
+crons = ["0 13 * * *"]
