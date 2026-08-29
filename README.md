@@ -1,10 +1,10 @@
-# Single Life Quotes — React + Vite + Cloudflare Worker
+# Single Life Quotes, by Rea — React + Vite + Cloudflare Worker
 
-Flashy single-page quote experience for **Single Life Quotes by Rea Insan / Life Legally Single**.
+Standalone quote brand featuring original single life quotes by Rea Insan.
 
 ## Cloudflare Workers deployment
 
-This repo deploys as a **Cloudflare Worker with static assets**. Vite must build the React app before Wrangler deploys it.
+This repo deploys as a **Cloudflare Worker with static assets**. Vite builds the React app before Wrangler deploys it.
 
 ### Cloudflare Workers Builds settings
 
@@ -14,10 +14,6 @@ In **Workers & Pages → your Worker → Settings → Builds**, use:
 - **Deploy command:** `npx wrangler deploy`
 - **Root directory:** `/` (repository root)
 - **Build output directory:** leave blank / not required for Workers deployment
-
-Workers Builds runs the build command first and the deploy command second. If the Build command is blank, Wrangler starts before `dist/` exists and deployment fails with an `assets.directory` error.
-
-The repository also declares a Wrangler custom build command in `wrangler.toml`, so `npx wrangler deploy` can build the Vite app in environments that honor Wrangler custom builds. Cloudflare Workers Builds currently requires the Dashboard Build command to be set explicitly.
 
 The required deployment flow is:
 
@@ -50,4 +46,4 @@ bun run deploy
 
 ## SEO / GEO / LLMO
 
-The app includes crawlable text, metadata, Open Graph tags, JSON-LD, author attribution, and topical language around single life quotes, self-love, independence, solo living, dating, freedom, and soft life.
+The site is positioned as **Single Life Quotes, by Rea**, a standalone collection of original quotes by **Rea Insan**. Its topical focus includes single life quotes, quotes about being single, self-love, independence, freedom, confidence, dating, solo living, soft life, and intentional singlehood. Metadata and JSON-LD establish the brand, creator, and primary subject for search engines and AI systems.
